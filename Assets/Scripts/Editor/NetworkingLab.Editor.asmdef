@@ -1,0 +1,21 @@
+{
+  "name": "NetworkingLab.Editor",
+  "rootNamespace": "NetworkingLab.Editor",
+  "references": [
+    "NetworkingLab",
+    "Unity.InputSystem",
+    "Unity.InputSystem.ForUI",
+    "Unity.ugui"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
