@@ -3,8 +3,20 @@
   "rootNamespace": "NetworkingLab.Editor",
   "references": [
     "NetworkingLab",
+    "NetworkingLab.NGO",
+    "NetworkingLab.NFE",
+    "Unity.Collections",
     "Unity.InputSystem",
     "Unity.InputSystem.ForUI",
+    "Unity.Netcode.Runtime",
+    "Unity.Netcode.Components",
+    "Unity.NetCode",
+    "Unity.NetCode.Authoring.Hybrid",
+    "Unity.Entities",
+    "Unity.Entities.Hybrid",
+    "Unity.Jobs",
+    "Unity.Scenes",
+    "Unity.Scenes.Editor",
     "Unity.ugui"
   ],
   "includePlatforms": [

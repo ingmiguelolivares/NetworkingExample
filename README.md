@@ -1,17 +1,22 @@
-# Unity Multiplayer Networking Lab — Local Gameplay Baseline
+# Unity Multiplayer Networking Lab Starter Project
 
-This project provides the framework-neutral gameplay used in class to compare Netcode for GameObjects (NGO) and Netcode for Entities (NFE). Its current state is **LOCAL BASELINE**: no networking framework is implemented.
+This repository is the teaching starter for comparing Netcode for GameObjects (NGO) and Netcode for Entities (NFE). It preserves the verified local gameplay and adds the scenes, prefabs, packages, connection panels, ECS components, Ghost configuration, and extension points that students use to complete client-server gameplay.
+
+The project is intentionally incomplete. Seven unique `STUDENT TODO` identifiers define the programming lab: NGO movement input, NGO server movement, NGO PowerUp RPC, NFE listen/connect, NFE GoInGame and spawn, NFE predicted movement, and NFE PowerUp RPC.
 
 ## Open and run
 
-- Unity version: **6000.6.0f1**.
-- Render pipeline: **Universal Render Pipeline (URP) 17.6.0**.
-- Open this folder in Unity Hub or Unity Editor.
-- Open `Assets/Scenes/LocalGameplayBaseline.unity` and enter Play Mode.
+- Unity: **6000.6.0f1**.
+- Render pipeline: **URP 17.6.0**.
+- Input System: **1.20.0**.
+- Multiplayer Play Mode: **3.0.0**.
+- Local reference: `Assets/Scenes/LocalGameplayBaseline.unity`.
+- NGO starter: `Assets/Scenes/NGOGameplay.unity`, UDP **7979**.
+- NFE starter: `Assets/Scenes/NFEGameplay.unity`, UDP **7980**.
 
-## Gameplay and controls
+Open the local baseline first and verify the four keyboard-controlled players and the PowerUp message. Then use the Word guide in `Docs/GUIA_LAB_UNITY_NETWORKING_LINUX.docx` for the NGO, NFE, Linux, container, Kubernetes, and Agones activities.
 
-Four colored local players move across the ground plane. Movement uses Unity Input System action maps stored in `Assets/Input/LocalPlayers.inputactions`, so bindings can be edited without changing `PlayerController`.
+## Local controls
 
 | Player | Movement | PowerUp |
 |---|---|---|
@@ -20,27 +25,29 @@ Four colored local players move across the ground plane. Movement uses Unity Inp
 | Player 3 | I J K L | O |
 | Player 4 | Numpad 8, 4, 5, 6 | Numpad 0 |
 
-PowerUp activation is local and intentionally has no gameplay effect. It follows `Input → ActivatePowerUp() → gameplay event → UI`. The UI shows `Player N activated PowerUp` for approximately two seconds.
+## Teaching boundary
 
-## Structure
+Included now:
 
-```text
-Assets/
-  Input/                 Configurable Input System action maps
-  Scenes/                LocalGameplayBaseline scene
-  Scripts/
-    Core/                Reserved for shared framework-neutral code
-    Player/              Input adapter and movement
-    PowerUp/             Activation and gameplay event
-    UI/                  PowerUp message presentation
-    Editor/              Deterministic scene builder
-  Tests/PlayMode/        Automated baseline checks
-```
+- framework-neutral local gameplay;
+- NGO `NetworkManager`, `UnityTransport`, network Player prefab, identity, connection UI, and extension code;
+- NFE client/server Worlds, ECS components, systems, Ghost prefab, SubScene, connection UI, and presentation bridge;
+- editable Address and Port fields;
+- reference Dockerfiles, Minikube/Agones scripts, and GameServer manifests;
+- the complete student lab guide.
 
-The gameplay assembly does not reference NGO, NFE, RPCs, network objects, ghosts, authority, ownership, prediction, or synchronization.
+Student work:
 
-## Planned teaching phases
+- complete the seven `STUDENT TODO` activities;
+- create Linux Dedicated Server builds;
+- prepare Debian and host-only networking;
+- build the server container;
+- install Minikube and Agones;
+- integrate the Agones lifecycle;
+- deploy a GameServer and connect four clients.
 
-After this baseline is validated, separate adapters will be added for NGO and then NFE while preserving the same observable gameplay. A later phase will run clients on the MacBook Pro and a Unity Dedicated Server in a Linux VirtualBox VM. None of those networking or server features are present yet.
+No Dedicated Server build, VM, container image, Kubernetes cluster, or Agones deployment is generated or executed in this starter.
 
-Multiplayer Play Mode **3.0.0 is installed and available**, but is not used by this local baseline. It is reserved for a later networking phase.
+## Architecture limitation
+
+The current Unity Linux Server target produces x86-64 executables. A native VirtualBox guest on Apple Silicon is ARM64 and cannot run that executable natively. Windows x86-64 with Debian amd64 has matching CPU architecture. The guide marks this limitation and requires an instructor-approved ARM64 server artifact or x86-64 environment for the Apple Silicon end-to-end checkpoint.
